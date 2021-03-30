@@ -20,8 +20,8 @@ const Total = ({ subtotal }) => {
     let PayfastConfig = {
       'amount': subtotal    ,
       'item_name': 'Botgoods',
-      'return_url': `https://my-botgoods-app.herokuapp.com/`,
-      'cancel_url': `https://my-botgoods-app.herokuapp.com/`,
+      'return_url': `http://localhost:8080`,
+      'cancel_url': `http://localhost:8080/`,
       'return_dev': 'https://sandbox.payfast.co.za/eng/process?merchant_id=10015422&merchant_key=ov9u3i696izit',
       'return_prod': 'https://www.payfast.co.za/eng/process?merchant_id=16281009&merchant_key=h5jxmes9n5lyq'
     };
