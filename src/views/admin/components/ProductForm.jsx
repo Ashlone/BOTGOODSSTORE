@@ -39,7 +39,8 @@ const FormSchema = Yup.object().shape({
     .of(Yup.string())
     .min(1, 'Please enter at least 1 keyword for this product.'),
   sizes: Yup.array()
-    .of(Yup.number()),
+    .of(Yup.number())
+    .positive('Number is invalid.'),
     //.min(1, 'Please enter a size for this product.'),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
