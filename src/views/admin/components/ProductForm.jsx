@@ -38,9 +38,10 @@ const FormSchema = Yup.object().shape({
   keywords: Yup.array()
     .of(Yup.string())
     .min(1, 'Please enter at least 1 keyword for this product.'),
-  sizes: Yup.number()
-    .positive('Number is invalid.'),
-    //.min(1, 'Please enter a size for this product.'),
+    price: Yup.number()
+    .positive('Price is invalid.'),
+    //.integer('Price should be an integer.')
+    //.required('Price is required.'),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
   availableColors: Yup.array()
@@ -170,15 +171,13 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 </div>
                 &nbsp;
                 <div className="product-form-field">
-                  <CustomCreatableSelect
-                    defaultValue={values.keywords.map((key) => ({ value: key, label: key }))}
-                    name="sizes"
-                    iid="sizes"
-                    type="number"
-                    isMulti
+                <Field
                     disabled={isLoading}
-                    placeholder="Create/Select Sizes"
-                    label="* Sizes (Millimeter)"
+                    name="sizes"
+                    id="sizes"
+                    type="number"
+                    label="* Sizes in mm"
+                    component={CustomInput}
                   />
                 </div>
               </div>
@@ -321,7 +320,7 @@ ProductForm.propTypes = {
     description: PropType.string,
     keywords: PropType.arrayOf(PropType.string),
     imageCollection: PropType.arrayOf(PropType.object),
-    sizes: PropType.arrayOf(PropType.string),
+    price: PropType.number,
     image: PropType.string,
     imageUrl: PropType.string,
     isFeatured: PropType.bool,
