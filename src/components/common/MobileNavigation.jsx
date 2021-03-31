@@ -22,11 +22,12 @@ const Navigation = (props) => {
   return (
     <nav className="mobile-navigation">
       <div className="mobile-navigation-main">
-        <div className="mobile-navigation-logo">
+        <div className="logo">
           <Link onClick={onClickLink} to={HOME}>
           <img alt="Logo" src={logo} />
           </Link>
         </div>
+        
 
         <BasketToggle>
           {({ onClickToggle }) => (
