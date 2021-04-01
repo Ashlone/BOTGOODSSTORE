@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
+import {Badge,Avatar} from 'antd'
 import { ImageLoader } from 'components/common';
 import {
   CustomColorInput, CustomCreatableSelect, CustomInput, CustomTextarea
@@ -87,6 +88,13 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
       alert('Product thumbnail image is required.');
     }
   };
+
+  const handleImageRemove=(id)=>{
+    isLoading(true)
+    //console.log('remove image',id);
+    
+  'https://botgoods-company-pty.firebaseio.com/users/jack/name/last.json'
+  }
 
   return (
     <div>
@@ -204,32 +212,39 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     Choose Images
                   </label>
                 )}
+                
               </div>
+              
+              
+
+                
               <div className="product-form-collection">
-                <>
+                
+                  
+                
+              </div>
+
+              <>
                   {imageFile.imageCollection.length >= 1 && (
                     imageFile.imageCollection.map((image) => (
-                      <div
-                        className="product-form-collection-image"
-                        key={image.id}
-                      >
-                        <ImageLoader
-                          alt=""
-                          src={image.url}
-                        />
-                        <button
-                          className="product-form-delete-image"
-                          onClick={() => removeImage({ id: image.id, name: 'imageCollection' })}
-                          title="Delete Image"
-                          type="button"
-                        >
-                          <i className="fa fa-times-circle" />
-                        </button>
-                      </div>
+                      <Badge count = 'X'
+                       key={image.id} 
+                       onClick={()=>handleImageRemove(image.id)}
+                       style={{cursor:"pointer"}}
+                       >
+                        <Avatar
+                      src={image.url}
+                      size={100}
+                      shape='square'
+                      className='product-form-collection-image'
+
+                      
+                      />
+                      </Badge>
                     ))
                   )}
                 </>
-              </div>
+              
               <br />
               <div className="d-flex">
                 <div className="product-form-field">
