@@ -22,9 +22,9 @@ const Navigation = (props) => {
   return (
     <nav className="mobile-navigation">
       <div className="mobile-navigation-main">
-        <div className="logo">
+        <div className="mobile-navigation-logo">
           <Link onClick={onClickLink} to={HOME}>
-          <img alt="Logo" src={logo} />
+            <h2>BOTGOODS</h2>
           </Link>
         </div>
         
