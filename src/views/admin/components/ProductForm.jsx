@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import firebase from 'firebase/app';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
 import {Badge,Avatar} from 'antd'
 import { ImageLoader } from 'components/common';
@@ -10,16 +11,16 @@ import {
 } from 'formik';
 import { useFileHandler } from 'hooks';
 import PropType from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 
-// Default brand names that I used. You can use what you want
-const brandOptions = [
-  { value: 'Arduino', label: 'Arduino' },
-  
-  
-];
 
+
+//fault brand names that I used. You can use what you want
+const brandOptions = [
+  { value: 'Arduino', label: 'Arduino' },]
+  
+  
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required('Product name is required.')
@@ -88,13 +89,24 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
       alert('Product thumbnail image is required.');
     }
   };
+  
+  
+  const handleImageRemove=async (id)=>{
+    const storageRef = firebase.storage().ref();
+    const all = await storageRef.child('products').listAll()
 
-  const handleImageRemove=(id)=>{
-    isLoading(true)
-    //console.log('remove image',id);
+    console.log(all);
+    var image = storageRef.child(`products/${id}`);
     
-  'https://botgoods-company-pty.firebaseio.com/users/jack/name/last.json'
-  }
+    console.log('remove image',image.fullPath);
+
+    image.delete().then(() => {
+    // File deleted successfully
+    }).catch((error) => {
+    // Uh-oh, an error occurred!
+    });
+}
+
 
   return (
     <div>
@@ -224,26 +236,26 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 
               </div>
 
+              
               <>
-                  {imageFile.imageCollection.length >= 1 && (
-                    imageFile.imageCollection.map((image) => (
-                      <Badge count = 'X'
-                       key={image.id} 
-                       onClick={()=>handleImageRemove(image.id)}
-                       style={{cursor:"pointer"}}
-                       >
-                        <Avatar
-                      src={image.url}
-                      size={100}
-                      shape='square'
-                      className='product-form-collection-image'
+{imageFile.imageCollection.length >= 1 && (
+imageFile.imageCollection.map((image) => (
+<Badge count = 'X'
+key={image.id}
+onClick= {()=>handleImageRemove(image.id)}  
+style={{cursor:"pointer"}} >
+<Avatar
+src={image.url}
+size={100}
+shape='square'
+className='product-form-collection-image'
 
-                      
                       />
                       </Badge>
                     ))
                   )}
                 </>
+
               
               <br />
               <div className="d-flex">
