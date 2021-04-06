@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import firebase from 'firebase/app';
 import { CheckOutlined, LoadingOutlined } from '@ant-design/icons';
-import {Badge,Avatar} from 'antd'
 import { ImageLoader } from 'components/common';
 import {
   CustomColorInput, CustomCreatableSelect, CustomInput, CustomTextarea
@@ -11,16 +8,15 @@ import {
 } from 'formik';
 import { useFileHandler } from 'hooks';
 import PropType from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import * as Yup from 'yup';
 
-
-
-//fault brand names that I used. You can use what you want
+// Default brand names that I used. You can use what you want
 const brandOptions = [
-  { value: 'Arduino', label: 'Arduino' },]
-  
-  
+  { value: 'Arduino', label: 'Arduino' },
+ 
+];
+
 const FormSchema = Yup.object().shape({
   name: Yup.string()
     .required('Product name is required.')
@@ -29,7 +25,7 @@ const FormSchema = Yup.object().shape({
    // .required('Brand name is required.'),
   price: Yup.number()
     .positive('Price is invalid.')
-    //.integer('Price should be an integer.')
+   // .integer('Price should be an integer.')
     .required('Price is required.'),
   description: Yup.string()
     .required('Description is required.'),
@@ -40,15 +36,14 @@ const FormSchema = Yup.object().shape({
   keywords: Yup.array()
     .of(Yup.string())
     .min(1, 'Please enter at least 1 keyword for this product.'),
-    price: Yup.number()
-    .positive('Price is invalid.'),
-    //.integer('Price should be an integer.')
-    //.required('Price is required.'),
+  sizes: Yup.array()
+    .of(Yup.string())
+    .min(1, 'Please enter a size for this product.'),
   isFeatured: Yup.boolean(),
   isRecommended: Yup.boolean(),
   availableColors: Yup.array()
-   // .of(Yup.string().required())
-   // .min(1, 'Please add a default color for this product.')
+    .of(Yup.string().required())
+    .min(1, 'Please add a default color for this product.')
 });
 
 const ProductForm = ({ product, onSubmit, isLoading }) => {
@@ -89,24 +84,6 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
       alert('Product thumbnail image is required.');
     }
   };
-  
-  
-  const handleImageRemove=async (id)=>{
-    const storageRef = firebase.storage().ref();
-    const all = await storageRef.child('products').listAll()
-
-    console.log(all);
-    var image = storageRef.child(`products/${id}`);
-    
-    console.log('remove image',image.fullPath);
-
-    image.delete().then(() => {
-    // File deleted successfully
-    }).catch((error) => {
-    // Uh-oh, an error occurred!
-    });
-}
-
 
   return (
     <div>
@@ -126,7 +103,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     name="name"
                     type="text"
                     label="* Product Name"
-                    placeholder="name"
+                    placeholder="Gago"
                     style={{ textTransform: 'capitalize' }}
                     component={CustomInput}
                   />
@@ -191,13 +168,15 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                 </div>
                 &nbsp;
                 <div className="product-form-field">
-                <Field
-                    disabled={isLoading}
+                  <CustomCreatableSelect
+                    defaultValue={values.keywords.map((key) => ({ value: key, label: key }))}
                     name="sizes"
-                    id="sizes"
-                    type="number"
-                    label="* Sizes in mm"
-                    component={CustomInput}
+                    iid="sizes"
+                
+                    isMulti
+                    disabled={isLoading}
+                    placeholder="Create/Select Sizes"
+                    label="* Sizes"
                   />
                 </div>
               </div>
@@ -224,39 +203,30 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     Choose Images
                   </label>
                 )}
-                
               </div>
-              
-              
-
-                
               <div className="product-form-collection">
-                
-                  
-                
-              </div>
-
-              
               <>
 {imageFile.imageCollection.length >= 1 && (
 imageFile.imageCollection.map((image) => (
-<Badge count = 'X'
-key={image.id}
-onClick= {()=>handleImageRemove(image.id)}  
-style={{cursor:"pointer"}} >
-<Avatar
-src={image.url}
-size={100}
-shape='square'
-className='product-form-collection-image'
+<div
+                        className="product-form-collection-image"
+                        key={image.id}
+                      >
+<button onClick={() => removeImage({ id: image.id, name: 'imageCollection' })}
+className="product-form-delete-image">
+Delete
+</button>
+<ImageLoader
+                          alt=""
+                          src={image.url}
+                        />
 
-                      />
-                      </Badge>
+                      </div>
                     ))
                   )}
                 </>
 
-              
+              </div>
               <br />
               <div className="d-flex">
                 <div className="product-form-field">
@@ -347,7 +317,7 @@ ProductForm.propTypes = {
     description: PropType.string,
     keywords: PropType.arrayOf(PropType.string),
     imageCollection: PropType.arrayOf(PropType.object),
-    price: PropType.number,
+    sizes: PropType.arrayOf(PropType.string),
     image: PropType.string,
     imageUrl: PropType.string,
     isFeatured: PropType.bool,

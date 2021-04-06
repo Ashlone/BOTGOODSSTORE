@@ -76,7 +76,7 @@ $ npm run build
 imageFile.imageCollection.map((image) => (
 <Badge count = 'X'
 key={image.id}
-onClick={()=>deleteFromFirebase(image.id)}
+<button onClick={() => deleteFromFirebase(image)}>
 style={{cursor:"pointer"}} >
 <Avatar
 src={image.url}
@@ -86,6 +86,27 @@ className='product-form-collection-image'
 
                       />
                       </Badge>
+                    ))
+                  )}
+                </>
+
+<>
+{imageFile.imageCollection.length >= 1 && (
+imageFile.imageCollection.map((image) => (
+<div
+                        className="product-form-collection-image"
+                        key={image.id}
+                      >
+<button onClick={() => removeImage({ id: image.id, name: 'imageCollection' })}
+className="product-form-delete-image">
+Delete
+</button>
+<ImageLoader
+                          alt=""
+                          src={image.url}
+                        />
+
+                      </div>
                     ))
                   )}
                 </>
