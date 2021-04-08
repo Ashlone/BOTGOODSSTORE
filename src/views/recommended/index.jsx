@@ -22,9 +22,7 @@ const RecommendedProducts = () => {
           <div className="banner-desc">
             <h1>Recommended Products</h1>
           </div>
-          <div className="banner-img">
-            <img src={bannerImg} alt="" />
-          </div>
+          
         </div>
         <div className="display">
           <div className="product-display-grid">
