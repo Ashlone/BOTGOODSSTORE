@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setPaymentDetails } from 'redux/actions/checkoutActions';
 
-const Total = ({ subtotal }) => {
+const Total = ({ subtotal,BasketItem }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
