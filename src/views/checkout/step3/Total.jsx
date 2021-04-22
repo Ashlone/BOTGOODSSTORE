@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, CheckOutlined } from '@ant-design/icons';
-import { BasketItem } from 'components/basket';
+import { Basket } from 'components/basket';
 import { CHECKOUT_STEP_2 } from 'constants/routes';
 import { useFormikContext } from 'formik';
 import { displayMoney } from 'helpers/utils';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { setPaymentDetails } from 'redux/actions/checkoutActions';
 
-const Total = ({ subtotal,BasketItem }) => {
+const Total = ({ subtotal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -17,10 +17,14 @@ const Total = ({ subtotal,BasketItem }) => {
     history.push(CHECKOUT_STEP_2);
   };
 
+  
+
+  
+
   const PayfastPayment = () => {
     let PayfastConfig = {
       'amount': subtotal,
-      'item_name':  BasketItem,
+      'item_name': botgoods,
       'return_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
       'cancel_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
       'return_dev': 'https://sandbox.payfast.co.za/eng/process?merchant_id=10015422&merchant_key=ov9u3i696izit',
