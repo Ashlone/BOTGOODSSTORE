@@ -18,8 +18,8 @@ const Total = ({ subtotal }) => {
 
   const PayfastPayment = () => {
     let PayfastConfig = {
-      'amount': subtotal    ,
-      'item_name': 'Botgoods',
+      'amount': subtotal,
+      'item_name':  <BasketItem/>,
       'return_url': `http://localhost:8080`,
       'cancel_url': `http://localhost:8080/`,
       'return_dev': 'https://sandbox.payfast.co.za/eng/process?merchant_id=10015422&merchant_key=ov9u3i696izit',
