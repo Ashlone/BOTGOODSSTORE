@@ -20,8 +20,8 @@ const Total = ({ subtotal }) => {
     let PayfastConfig = {
       'amount': subtotal,
       'item_name':  <BasketItem/>,
-      'return_url': `http://localhost:8080`,
-      'cancel_url': `http://localhost:8080/`,
+      'return_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
+      'cancel_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
       'return_dev': 'https://sandbox.payfast.co.za/eng/process?merchant_id=10015422&merchant_key=ov9u3i696izit',
       'return_prod': 'https://www.payfast.co.za/eng/process?merchant_id=16281009&merchant_key=h5jxmes9n5lyq'
     };
