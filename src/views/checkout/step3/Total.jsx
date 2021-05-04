@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, CheckOutlined } from '@ant-design/icons';
-import { Basket } from 'components/basket';
+import { Basket, BasketItem } from 'components/basket';
 import { CHECKOUT_STEP_2 } from 'constants/routes';
 import { useFormikContext } from 'formik';
 import { displayMoney } from 'helpers/utils';
@@ -18,17 +18,18 @@ const Total = ({ subtotal }) => {
   };
 
   
-
   
 
   const PayfastPayment = () => {
     let PayfastConfig = {
       'amount': subtotal,
-      'item_name': botgoods,
+      'item_name': product,
       'return_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
       'cancel_url': `https://master.d14qrahcewz8qq.amplifyapp.com/`,
       'return_dev': 'https://sandbox.payfast.co.za/eng/process?merchant_id=10015422&merchant_key=ov9u3i696izit',
-      'return_prod': 'https://www.payfast.co.za/eng/process?merchant_id=16281009&merchant_key=h5jxmes9n5lyq'
+      'return_prod': 'https://www.payfast.co.za/eng/process?merchant_id=16281009&merchant_key=h5jxmes9n5lyq',
+      'notify_url': `https://botgoods.co.za/putOrder?order=${items}`,
+
     };
 
     PayfastConfig['payment_url'] = `${PayfastConfig['return_prod']}`;
@@ -36,6 +37,7 @@ const Total = ({ subtotal }) => {
     PayfastConfig['payment_url'] += `&item_name=${PayfastConfig['item_name']}`; 
     PayfastConfig['payment_url'] += `&return_url=${PayfastConfig['return_url']}`;
     PayfastConfig['payment_url'] += `&cancel_url=${PayfastConfig['cancel_url']}`;
+    PayfastConfig['payment_url'] += `&notify_url=${PayfastConfig['notify_url']}`;
 
     window.location.href = PayfastConfig['payment_url'];
   };
