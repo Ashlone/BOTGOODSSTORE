@@ -112,7 +112,7 @@ const ViewProduct = () => {
                 <br />
                 <br />
                 <Select
-                  placeholder="--Select Size--"
+                  placeholder="Select Size or Model"
                   onChange={onSelectedSizeChange}
                   options={product.sizes.sort((a, b) => (a < b ? -1 : 1)).map((size) => ({ label: `${size} `, value: size }))}
                   styles={{ menu: (provided) => ({ ...provided, zIndex: 10 }) }}
