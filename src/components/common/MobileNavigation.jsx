@@ -1,4 +1,4 @@
-/*import { BasketToggle } from 'components/basket';
+import { BasketToggle } from 'components/basket';
 import { HOME, SIGNIN } from 'constants/routes';
 import PropType from 'prop-types';
 import React from 'react';
@@ -23,9 +23,7 @@ const Navigation = (props) => {
     <nav className="mobile-navigation">
       <div className="mobile-navigation-main">
         <div className="mobile-navigation-logo">
-          <Link onClick={onClickLink} to={HOME}>
-          
-          </Link>
+          <Link onClick={onClickLink} to={HOME}>Botgoods </Link>
         </div>
         
 
@@ -90,7 +88,7 @@ Navigation.propTypes = {
 
 export default Navigation;*/
 
-import { FilterOutlined, ShoppingOutlined } from '@ant-design/icons';
+/*import { FilterOutlined, ShoppingOutlined } from '@ant-design/icons';
 import * as ROUTE from 'constants/routes';
 import logo from 'images/botgoods.png';
 import React, { useEffect, useRef } from 'react';
