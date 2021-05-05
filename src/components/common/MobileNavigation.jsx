@@ -86,7 +86,7 @@ Navigation.propTypes = {
   ]).isRequired
 };
 
-export default Navigation;*/
+export default Navigation;
 
 /*import { FilterOutlined, ShoppingOutlined } from '@ant-design/icons';
 import * as ROUTE from 'constants/routes';
@@ -224,4 +224,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
+*/
