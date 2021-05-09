@@ -34,9 +34,9 @@ const Home = () => {
         <div className="banner">
           <div className="banner-desc">
             <h1 className="text-thin">
-              <strong>Best</strong>
-              &nbsp;Place to  Shop&nbsp;
-              <strong>With Pride</strong>
+              <strong>Saved</strong>
+              &nbsp;With&nbsp;
+              <strong>Pride</strong>
             </h1>
             
             
