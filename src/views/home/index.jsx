@@ -34,7 +34,7 @@ const Home = () => {
         <div className="banner">
           <div className="banner-desc">
             <h1 className="text-thin">
-              <strong>Saved</strong>
+              <strong>Served</strong>
               &nbsp;With&nbsp;
               <strong>Pride</strong>
             </h1>
