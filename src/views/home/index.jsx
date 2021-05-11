@@ -5,7 +5,7 @@ import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from 'constants/routes'
 import {
   useDocumentTitle, useFeaturedProducts, useRecommendedProducts, useScrollTop
 } from 'hooks';
-//import bannerImg from 'images/homebanner.png';
+import bannerImg from 'images/botgoodsbanner.png';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -46,8 +46,10 @@ const Home = () => {
               <ArrowRightOutlined />
             </Link>
             </div>
+            <div className="banner-img"><img src={bannerImg} alt='botgoodsbanner'/></div>
             
         </div>
+
           
         <div className="display">
           <div className="display-header">
